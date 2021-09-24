@@ -3,8 +3,10 @@ import java.io.FilenameFilter;
 import java.util.Scanner;
 
 public class App {
-    static String folder = "Content";
+    static String folder = "src/peli/Content";
     public static void main(String[] args) throws Exception {
+
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
         File[] menuFiles = getTextFilesInFolder();
         printMenus(menuFiles);
@@ -23,6 +25,8 @@ public class App {
             } catch (Exception e) {
                 System.out.println("Tuli virhe: " + e.getLocalizedMessage());
             }
+
+            System.out.println(); // Halutaan tyhjä rivi menujen väliin
         }
     }
     
