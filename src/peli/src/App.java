@@ -8,11 +8,19 @@ public class App {
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
-        File[] menuFiles = getTextFilesInFolder();
+        File[] menuFiles = getTextFilesInFolder(folder);
         printMenus(menuFiles);
 
-        // Tässä ohjelma voi kysyä mihin menuun mennään..
-        // ja sen jälkeen toistaa samat asiat..
+        Scanner lukija = new Scanner(System.in);
+
+        // Käyttäjä valitsee mihin ala-valikkoon haluaa
+        // valinta pitää vastata kansion nimeä nykyisessä kansiossa.
+        String kansio = lukija.nextLine();
+
+        // Kun käyttäjä on valinnut kansion, listataan sen sisällä olevat vaihtoehdot
+        File[] subMenu = getTextFilesInFolder(folder + "/" + kansio);
+        printMenus(subMenu);
+        
     }
 
     static void printMenus(File[] files) {
@@ -30,7 +38,7 @@ public class App {
         }
     }
     
-    static File[] getTextFilesInFolder() {
+    static File[] getTextFilesInFolder(String path) {
         FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File f, String name) {
@@ -39,7 +47,7 @@ public class App {
             }
         };
         
-        File[] files = new File(folder).listFiles(filter);
+        File[] files = new File(path).listFiles(filter);
         return files;
     }
 }
